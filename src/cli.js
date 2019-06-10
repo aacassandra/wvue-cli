@@ -232,6 +232,97 @@ async function arg02(arg1, arg2) {
           );
           console.log(chalk.yellow("wvue run build"));
         }
+      } else if (arg2 == "installer") {
+        // process.stdout.write("\x1Bc");
+        let json = await readFile("webos/appinfo.json");
+        if (json.finded) {
+          console.log(chalk.hex(Info)("wvue CLI v" + pkg.version));
+          json = JSON.parse(json.value);
+          let appDomain = json.id;
+          let appVersion = json.version;
+          let fileName = appDomain + "_" + appVersion + "_all.ipk";
+          let checkFile = await readFile(fileName);
+          if (!checkFile.finded) {
+            console.log(
+              chalk.hex(Danger)(
+                "WebOS project package not found, please run the command bellow"
+              )
+            );
+            console.log(chalk.yellow("wvue run package"));
+            process.exit();
+            return;
+          }
+          const status = new Spinner("Installing package, please wait...");
+          status.start();
+
+          let err;
+          try {
+            await execa.shell("ares-install " + fileName);
+          } catch (error) {
+            err = error;
+          }
+
+          if (err) {
+            status.stop();
+            console.log(
+              chalk.hex(Danger)(
+                err.stderr + "And make sure your emulator is opened."
+              )
+            );
+          } else {
+            status.stop();
+            console.log(
+              chalk.hex(Success)("Package has successfully installed")
+            );
+          }
+          process.exit();
+        } else {
+          console.log(
+            chalk.hex(Danger)(
+              "webos directory not found, please run the command bellow"
+            )
+          );
+          console.log(chalk.yellow("wvue run build"));
+        }
+      } else if (arg2 == "launcher") {
+        // process.stdout.write("\x1Bc");
+        let json = await readFile("webos/appinfo.json");
+        if (json.finded) {
+          console.log(chalk.hex(Info)("wvue CLI v" + pkg.version));
+          json = JSON.parse(json.value);
+          let appDomain = json.id;
+          const status = new Spinner("Installing package, please wait...");
+          status.start();
+
+          let err;
+          try {
+            await execa.shell("ares-launch " + appDomain);
+          } catch (error) {
+            err = error;
+          }
+
+          if (err) {
+            status.stop();
+            console.log(
+              chalk.hex(Danger)(
+                err.stderr + "And make sure your package has installed."
+              )
+            );
+          } else {
+            status.stop();
+            console.log(
+              chalk.hex(Success)("Package has successfully launched")
+            );
+          }
+          process.exit();
+        } else {
+          console.log(
+            chalk.hex(Danger)(
+              "webos directory not found, please run the command bellow"
+            )
+          );
+          console.log(chalk.yellow("wvue run build"));
+        }
       } else {
         console.log(
           chalk.hex(Danger)("wvue command not found, please read 'wvue --help'")

@@ -1,6 +1,6 @@
 {
   "name": "@aacassandra/wvue-cli",
-  "version": "19.6.10",
+  "version": "19.6.101",
   "description": "This is Vue CLI for LG-WebOS Project",
   "main": "src/index.js",
   "bin": {
@@ -14,11 +14,21 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "cli",
+    "vue webos cli",
+    "webos vue cli",
+    "webos lg cli with vuejs",
     "wvue"
   ],
   "author": "alauddinafifcassandra@programmer.net",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aacassandra/wvue-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aacassandra/wvue-cli/issues"
+  },
+  "homepage": "https://github.com/aacassandra/wvue-cli#readme",
   "dependencies": {
     "arg": "^4.1.0",
     "chalk": "^2.4.2",
