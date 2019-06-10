@@ -1,4 +1,5 @@
 {
+  "wvue": true,
   "compilerOptions": {
     "target": "es5",
     "module": "esnext",

@@ -4,6 +4,7 @@ import clear from "clear";
 import figlet from "figlet";
 import execa from "execa";
 import shell from "shelljs";
+import pretty from "pretty";
 import fs from "fs";
 import pkg from "../package.json";
 import isValidDomain from "is-valid-domain";
@@ -20,12 +21,18 @@ let opt = {};
 
 function checkProjectDirectories(modeDefault = true) {
   return new Promise(async (resolve, reject) => {
-    let contents = await readFile("ionic.config.json");
-    if (modeDefault == true) {
-      if (contents.finded != true) {
+    let contents = await readFile("tsconfig.json");
+    if (!contents.finded) {
+      contents = await readFile("jsconfig.json");
+      if (!contents.finded) {
         console.log(chalk.hex(Danger)("Outside wvue project directory"));
         console.log("    ");
-      } else {
+        resolve(false);
+      }
+    }
+
+    if (modeDefault == true) {
+      if (contents.finded) {
         let wvue = contents.value.search("wvue");
         let res = contents.value.substring(wvue, wvue + 4);
         if (res == "wvue") {
@@ -33,6 +40,9 @@ function checkProjectDirectories(modeDefault = true) {
         } else {
           console.log(chalk.hex(Danger)("Outside wvue project directory"));
         }
+        console.log("    ");
+      } else {
+        console.log(chalk.hex(Danger)("Outside wvue project directory"));
         console.log("    ");
       }
       resolve(true);
@@ -198,14 +208,14 @@ async function arg02(arg1, arg2) {
   } else if (arg1 == "run") {
     let check = await checkProjectDirectories(false);
     if (check != false) {
-      if (arg2 == "device") {
+      if (arg2 == "build") {
         process.stdout.write("\x1Bc");
         console.log(chalk.hex(Success)("wvue CLI v" + pkg.version));
-        let res = await onRunQuestions();
-      } else if (arg2 == "serve") {
-        process.stdout.write("\x1Bc");
-        console.log(chalk.hex(Success)("wvue CLI v" + pkg.version));
-        let res = await onRunServe();
+        await shell.exec("npm run build");
+        let readHtml = await readFile("webos/index.html");
+        readHtml = await pretty(readHtml.value);
+        await createFile("webos/index.html", readHtml, false, false);
+        console.log(chalk.hex(Success)("Build has successfully"));
       } else {
         console.log(
           chalk.hex(Danger)("wvue command not found, please read 'wvue --help'")
