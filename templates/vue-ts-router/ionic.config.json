@@ -1,0 +1,8 @@
+{
+  "name": "custom",
+  "integrations": {
+    "cordova": {},
+    "wvue": {}
+  },
+  "type": "custom"
+}

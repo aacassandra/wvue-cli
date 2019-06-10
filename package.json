@@ -1,0 +1,40 @@
+{
+  "name": "@aacassandra/wvue-cli",
+  "version": "19.5.23",
+  "description": "This is Vue CLI for LG-WebOS Project",
+  "main": "src/index.js",
+  "bin": {
+    "@aacassandra/wvue-cli": "bin/wvue",
+    "wvue": "bin/wvue"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cli",
+    "wvue"
+  ],
+  "author": "alauddinafifcassandra@programmer.net",
+  "license": "MIT",
+  "dependencies": {
+    "arg": "^4.1.0",
+    "chalk": "^2.4.2",
+    "clear": "^0.1.0",
+    "esm": "^3.2.18",
+    "execa": "^1.0.0",
+    "figlet": "^1.2.1",
+    "html2json": "^1.0.2",
+    "inquirer": "^6.3.1",
+    "is-valid-domain": "0.0.9",
+    "listr": "^0.14.3",
+    "ncp": "^2.0.0",
+    "pkg-install": "^1.0.0",
+    "pretty": "^2.0.0",
+    "replace": "^1.1.0",
+    "shelljs": "^0.8.3",
+    "xml2js": "^0.4.19"
+  }
+}

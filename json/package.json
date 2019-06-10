@@ -1,0 +1,273 @@
+{
+  "js": {
+    "name": "<dynamic_change>",
+    "displayName": "<dynamic_change>",
+    "version": "<dynamic_change>",
+    "description": "<dynamic_change>",
+    "private": true,
+    "main": "index.js",
+    "author": "wvue Team",
+    "license": "Apache-2.0",
+    "scripts": {
+      "dev": "vue-cli-service serve",
+      "build": "vue-cli-service build"
+    },
+    "dependencies": {
+      "@ionic/vue": "0.0.4",
+      "core-js": "^2.6.5",
+      "vue": "^2.6.10",
+      "rxjs": "^6.5.1",
+      "sql-promise-helper": "0.0.1-pre03",
+      "vue-router": "^3.0.3"
+    },
+    "devDependencies": {
+      "@vue/cli-service": "^3.7.0",
+      "vue-template-compiler": "^2.5.21"
+    }
+  },
+  "ts": {
+    "name": "<dynamic_change>",
+    "displayName": "<dynamic_change>",
+    "version": "<dynamic_change>",
+    "description": "<dynamic_change>",
+    "private": true,
+    "main": "index.js",
+    "author": "wvue Team",
+    "license": "Apache-2.0",
+    "scripts": {
+      "serve": "vue-cli-service serve",
+      "build": "vue-cli-service build"
+    },
+    "dependencies": {
+      "@ionic/vue": "0.0.4",
+      "core-js": "^2.6.5",
+      "vue": "^2.6.10",
+      "rxjs": "^6.5.1",
+      "sql-promise-helper": "0.0.1-pre03",
+      "aac-ionic-vue-ts-plugins": "^19.5.19",
+      "vue-router": "^3.0.3"
+    },
+    "devDependencies": {
+      "@vue/cli-service": "^3.7.0",
+      "@vue/cli-plugin-typescript": "^3.7.0",
+      "typescript": "^3.4.3",
+      "vue-template-compiler": "^2.5.21"
+    }
+  },
+  "decor": {
+    "vue-property-decorator": "^8.1.1"
+  },
+  "babel": {
+    "@vue/cli-plugin-babel": "^3.7.0"
+  },
+  "vuex": {
+    "vuex": "^3.0.1"
+  },
+  "styler": {
+    "url": {
+      "js": {
+        "css": "/vue-styler/js/vue-js-style-css",
+        "sassDart": "/vue-styler/js/vue-js-style-dart",
+        "sassNode": "/vue-styler/js/vue-js-style-node",
+        "less": "/vue-styler/js/vue-js-style-less",
+        "stylus": "/vue-styler/js/vue-js-style-stylus"
+      },
+      "ts": {
+        "decor": {
+          "css": "/vue-styler/ts/vue-ts-style-css-decor",
+          "sassDart": "/vue-styler/ts/vue-ts-style-dart-decor",
+          "sassNode": "/vue-styler/ts/vue-ts-style-node-decor",
+          "less": "/vue-styler/ts/vue-ts-style-less-decor",
+          "stylus": "/vue-styler/ts/vue-ts-style-stylus-decor"
+        },
+        "undecor": {
+          "css": "/vue-styler/ts/vue-ts-style-css",
+          "sassDart": "/vue-styler/ts/vue-ts-style-dart",
+          "sassNode": "/vue-styler/ts/vue-ts-style-node",
+          "less": "/vue-styler/ts/vue-ts-style-less",
+          "stylus": "/vue-styler/ts/vue-ts-style-stylus"
+        }
+      }
+    },
+    "pkg": {
+      "sassDart": {
+        "sass": "^1.18.0",
+        "sass-loader": "^7.1.0"
+      },
+      "sassNode": {
+        "node-sass": "^4.9.0",
+        "sass-loader": "^7.1.0"
+      },
+      "less": {
+        "less": "^3.0.4",
+        "less-loader": "^4.1.0"
+      },
+      "stylus": {
+        "stylus": "^0.54.5",
+        "stylus-loader": "^3.0.2"
+      }
+    }
+  },
+  "linter": {
+    "js": {
+      "url": {
+        "airbnb": "/vue-lint/js/vue-lint-airbnb",
+        "prettier": "/vue-lint/js/vue-lint-prettier",
+        "recommended": "/vue-lint/js/vue-lint-recommended",
+        "standard": "/vue-lint/js/vue-lint-standard"
+      },
+      "pkg": {
+        "airbnb": {
+          "@vue/cli-plugin-eslint": "^3.7.0",
+          "@vue/eslint-config-airbnb": "^4.0.0",
+          "babel-eslint": "^10.0.1",
+          "eslint": "^5.16.0",
+          "eslint-plugin-vue": "^5.0.0"
+        },
+        "prettier": {
+          "@vue/cli-plugin-eslint": "^3.7.0",
+          "@vue/eslint-config-prettier": "^4.0.1",
+          "babel-eslint": "^10.0.1",
+          "eslint": "^5.16.0",
+          "eslint-plugin-vue": "^5.0.0"
+        },
+        "recommended": {
+          "@vue/cli-plugin-eslint": "^3.7.0",
+          "babel-eslint": "^10.0.1",
+          "eslint": "^5.16.0",
+          "eslint-plugin-vue": "^5.0.0"
+        },
+        "standard": {
+          "@vue/cli-plugin-eslint": "^3.7.0",
+          "@vue/eslint-config-standard": "^4.0.0",
+          "babel-eslint": "^10.0.1",
+          "eslint": "^5.16.0",
+          "eslint-plugin-vue": "^5.0.0"
+        }
+      }
+    },
+    "ts": {
+      "url": {
+        "airbnb": "/vue-lint/ts/vue-ts-lint-airbnb",
+        "prettier": "/vue-lint/ts/vue-ts-lint-prettier",
+        "recommended": "/vue-lint/ts/vue-ts-lint-recommended",
+        "standard": "/vue-lint/ts/vue-ts-lint-standard",
+        "tslint": "/vue-lint/ts/vue-ts-lint-tslint"
+      },
+      "pkg": {
+        "airbnb": {
+          "@vue/cli-plugin-eslint": "^3.7.0",
+          "@vue/eslint-config-airbnb": "^4.0.0",
+          "@vue/eslint-config-typescript": "^4.0.0",
+          "babel-eslint": "^10.0.1",
+          "eslint": "^5.16.0",
+          "eslint-plugin-vue": "^5.0.0"
+        },
+        "prettier": {
+          "@vue/cli-plugin-eslint": "^3.7.0",
+          "@vue/eslint-config-prettier": "^4.0.1",
+          "@vue/eslint-config-typescript": "^4.0.0",
+          "babel-eslint": "^10.0.1",
+          "eslint": "^5.16.0",
+          "eslint-plugin-vue": "^5.0.0"
+        },
+        "recommended": {
+          "@vue/cli-plugin-eslint": "^3.7.0",
+          "@vue/eslint-config-typescript": "^4.0.0",
+          "babel-eslint": "^10.0.1",
+          "eslint": "^5.16.0",
+          "eslint-plugin-vue": "^5.0.0"
+        },
+        "standard": {
+          "@vue/cli-plugin-eslint": "^3.7.0",
+          "@vue/eslint-config-standard": "^4.0.0",
+          "@vue/eslint-config-typescript": "^4.0.0",
+          "babel-eslint": "^10.0.1",
+          "eslint": "^5.16.0",
+          "eslint-plugin-vue": "^5.0.0"
+        },
+        "tslint": {}
+      }
+    }
+  },
+  "tsconfig": {
+    "babel": {
+      "compilerOptions": {
+        "target": "esnext",
+        "module": "esnext",
+        "strict": true,
+        "jsx": "preserve",
+        "importHelpers": true,
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
+        "baseUrl": ".",
+        "types": [
+          "webpack-env"
+        ],
+        "paths": {
+          "@/*": [
+            "src/*"
+          ]
+        },
+        "lib": [
+          "esnext",
+          "dom",
+          "dom.iterable",
+          "scripthost"
+        ]
+      },
+      "include": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue",
+        "tests/**/*.ts",
+        "tests/**/*.tsx"
+      ],
+      "exclude": [
+        "node_modules"
+      ]
+    },
+    "unbabel": {
+      "compilerOptions": {
+        "target": "es5",
+        "module": "esnext",
+        "strict": true,
+        "jsx": "preserve",
+        "importHelpers": true,
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
+        "baseUrl": ".",
+        "types": [
+          "webpack-env"
+        ],
+        "paths": {
+          "@/*": [
+            "src/*"
+          ]
+        },
+        "lib": [
+          "esnext",
+          "dom",
+          "dom.iterable",
+          "scripthost"
+        ]
+      },
+      "include": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue",
+        "tests/**/*.ts",
+        "tests/**/*.tsx"
+      ],
+      "exclude": [
+        "node_modules"
+      ]
+    }
+  }
+}
