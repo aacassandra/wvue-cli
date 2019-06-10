@@ -192,6 +192,7 @@
   },
   "tsconfig": {
     "babel": {
+      "wvue": true,
       "compilerOptions": {
         "target": "esnext",
         "module": "esnext",
@@ -231,6 +232,7 @@
       ]
     },
     "unbabel": {
+      "wvue": true,
       "compilerOptions": {
         "target": "es5",
         "module": "esnext",

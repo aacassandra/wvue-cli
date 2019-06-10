@@ -14,9 +14,12 @@ import {onPlugin, onPlatform} from "../arguments/onCordova";
 import {onRunQuestions} from "../questions/onRun";
 import {onRunServe} from "../arguments/onRun";
 import {readFile, createFile, xmlFileToJs, jsToXmlFile} from "../actions";
+const CLI = require("clui");
+const Spinner = CLI.Spinner;
 
 let Danger = "#852222";
 let Success = "#228564";
+let Info = "#327a9e";
 let opt = {};
 
 function checkProjectDirectories(modeDefault = true) {
@@ -26,7 +29,7 @@ function checkProjectDirectories(modeDefault = true) {
       contents = await readFile("jsconfig.json");
       if (!contents.finded) {
         console.log(chalk.hex(Danger)("Outside wvue project directory"));
-        console.log("    ");
+        process.exit();
         resolve(false);
       }
     }
@@ -67,58 +70,37 @@ function checkProjectDirectories(modeDefault = true) {
 function OnHelp() {
   console.log("opt");
   console.log(
-    chalk.hex(Success)("  -v, --version"),
+    chalk.hex(Info)("  -v, --version"),
     "............................ Output the version number"
   );
   console.log(
-    chalk.hex(Success)("  -h, --help"),
+    chalk.hex(Info)("  -h, --help"),
     "............................... Output usage information"
   );
   console.log("    ");
   console.log("Global Commands");
   console.log(
-    chalk.hex(Success)("  create <app-name> <app-domain>"),
+    chalk.hex(Info)("  create <app-name> <app-domain>"),
     "........... Create a new project with app-domain for optional"
   );
   console.log(
-    chalk.hex(Success)("  plugin <action> <plugin-name>"),
-    "............ Manage project plugins"
-  );
-  console.log(
-    chalk.hex(Success)("  platform <action> <os>"),
-    "................... Manage project platform"
-  );
-  console.log(
-    chalk.hex(Success)("  run <os>"),
-    "................................. Run project (include prepaire & compile)"
-  );
-  console.log(
-    chalk.hex(Success)("  build <os>"),
-    "............................... Project prepare & compile"
-  );
-  console.log(
-    chalk.hex(Success)("  prepare <os>"),
-    "............................. Copy files into platform(s) for building"
+    chalk.hex(Info)("  run <mode>"),
+    "............................... Run mode as (build, package, installer or launcher)"
   );
   console.log("    ");
   console.log("Examples");
-  console.log(
-    chalk.hex(Success)("  wvue create myApp org.apache.cordova.myApp")
-  );
-  console.log(chalk.hex(Success)("  wvue plugin add cordova-plugin-camera"));
-  console.log(chalk.hex(Success)("  wvue plugin rm cordova-plugin-camera"));
-  console.log(chalk.hex(Success)("  wvue platform add android"));
-  console.log(chalk.hex(Success)("  wvue platform rm android"));
-  console.log(chalk.hex(Success)("  wvue run android"));
-  console.log(chalk.hex(Success)("  wvue run serve"));
-  console.log(chalk.hex(Success)("  wvue build android"));
+  console.log(chalk.hex(Info)("  wvue create myApp org.apache.cordova.myApp"));
+  console.log(chalk.hex(Info)("  wvue run build"));
+  console.log(chalk.hex(Info)("  wvue run package"));
+  console.log(chalk.hex(Info)("  wvue run installer"));
+  console.log(chalk.hex(Info)("  wvue run launcher"));
   return;
 }
 
 async function arg00() {
   clear();
   console.log(
-    chalk.hex("#5BB984")(
+    chalk.hex(Info)(
       figlet.textSync("wvue", {
         horizontalLayout: "full"
       })
@@ -157,7 +139,7 @@ function arg01(arg1) {
   } else if (arg1 == "prepare") {
     console.log(chalk.hex(Danger)("wvue prepare <os:android/ios>"));
   } else if (arg1 == "--version" || arg1 == "-v") {
-    console.log(chalk.hex(Success)("wvue CLI v" + pkg.version));
+    console.log(chalk.hex(Info)("wvue CLI v" + pkg.version));
   } else if (arg1 == "--help" || arg1 == "-h") {
     OnHelp();
   } else {
@@ -178,7 +160,7 @@ async function arg02(arg1, arg2) {
         targetDirectory: process.cwd() + "/" + arg2
       };
       process.stdout.write("\x1Bc");
-      console.log(chalk.hex(Success)("wvue CLI v" + pkg.version));
+      console.log(chalk.hex(Info)("wvue CLI v" + pkg.version));
       let res = await onCreateQuestions(opt);
       // console.log(res);
       let res2 = await onCreateProject(res);
@@ -210,12 +192,46 @@ async function arg02(arg1, arg2) {
     if (check != false) {
       if (arg2 == "build") {
         process.stdout.write("\x1Bc");
-        console.log(chalk.hex(Success)("wvue CLI v" + pkg.version));
+        console.log(chalk.hex(Info)("wvue CLI v" + pkg.version));
         await shell.exec("npm run build");
         let readHtml = await readFile("webos/index.html");
         readHtml = await pretty(readHtml.value);
         await createFile("webos/index.html", readHtml, false, false);
         console.log(chalk.hex(Success)("Build has successfully"));
+      } else if (arg2 == "package") {
+        process.stdout.write("\x1Bc");
+        let json = await readFile("webos/appinfo.json");
+        if (json.finded) {
+          console.log(chalk.hex(Info)("wvue CLI v" + pkg.version));
+          const status = new Spinner("Creating package, please wait...");
+          status.start();
+          const result = await execa("ares-package", ["webos"], {
+            cwd: process.cwd()
+          });
+          if (result.failed) {
+            console.log(
+              chalk.hex(Danger)("Failed to create package of webos project")
+            );
+            status.stop();
+            process.exit();
+          } else {
+            json = JSON.parse(json.value);
+            let appDomain = json.id;
+            let appVersion = json.version;
+            status.stop();
+            console.log(chalk.hex(Success)("Package has successfully created"));
+            console.log(
+              chalk.yellow(appDomain + "_" + appVersion + "_all.ipk")
+            );
+          }
+        } else {
+          console.log(
+            chalk.hex(Danger)(
+              "webos directory not found, please run the command bellow"
+            )
+          );
+          console.log(chalk.yellow("wvue run build"));
+        }
       } else {
         console.log(
           chalk.hex(Danger)("wvue command not found, please read 'wvue --help'")
