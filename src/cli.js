@@ -193,6 +193,16 @@ async function arg02(arg1, arg2) {
       if (arg2 == "build") {
         process.stdout.write("\x1Bc");
         console.log(chalk.hex(Info)("wvue CLI v" + pkg.version));
+        //begin:: update version
+        let pkgJson = await readFile("package.json");
+        pkgJson = JSON.parse(pkgJson.value);
+
+        let appInfo = await readFile("public/appinfo.json");
+        appInfo = JSON.parse(appInfo.value);
+        appInfo.version = pkgJson.version;
+        createFile("public/appinfo.json", appInfo, true, true);
+        //end:: update version
+
         await shell.exec("npm run build");
         let readHtml = await readFile("webos/index.html");
         readHtml = await pretty(readHtml.value);

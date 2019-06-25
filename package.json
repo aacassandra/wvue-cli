@@ -1,6 +1,6 @@
 {
   "name": "@aacassandra/wvue-cli",
-  "version": "19.6.101",
+  "version": "19.6.102",
   "description": "This is Vue CLI for LG-WebOS Project",
   "main": "src/index.js",
   "bin": {
